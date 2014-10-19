@@ -80,7 +80,7 @@
 			else if( this.type === 'input' ) {
 				this._createInput();
 			}
-            this.elOriginal.className = this.elOriginal.className + 'has-nl-field';
+            this.elOriginal.className = this.elOriginal.className + ' has-nl-field';
 		},
 		_createDropDown : function() {
 			var self = this;
@@ -192,6 +192,19 @@
 				this.toggle.innerHTML = this.getinput.value.trim() !== '' ? this.getinput.value : this.getinput.getAttribute( 'placeholder' );
 				this.elOriginal.value = this.getinput.value;
 			}
+            this.fireEvent('change');
+		},
+        fireEvent: function (eventName) {
+            if (document.createEventObject) {
+                var eventIE = document.createEventObject();
+
+                return this.elOriginal.fireEvent('on' + eventName, eventIE)
+            } else {
+                var event = document.createEvent("HTMLEvents");
+                event.initEvent(eventName, true, true );
+
+                return ! this.elOriginal.dispatchEvent(event);
+            }
 		}
 	};
 
