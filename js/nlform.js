@@ -136,8 +136,8 @@
 		},
 		_initEvents : function() {
 			var self = this;
-			this.toggle.addEventListener( 'click', function( ev ) { ev.preventDefault(); ev.stopPropagation(); self._open(); } );
-			this.toggle.addEventListener( 'touchstart', function( ev ) { ev.preventDefault(); ev.stopPropagation(); self._open(); } );
+			this.toggle.addEventListener( 'click', function( ev ) { ev.preventDefault(); self._open(); } );
+			this.toggle.addEventListener( 'touchstart', function( ev ) { ev.preventDefault(); self._open(); } );
 
 			if( this.type === 'dropdown' ) {
 				var opts = Array.prototype.slice.call( this.optionsList.querySelectorAll( 'li' ) );
@@ -156,6 +156,11 @@
 				this.inputsubmit.addEventListener( 'touchstart', function( ev ) { ev.preventDefault(); self.close(); } );
 			}
 
+            document.addEventListener('click', function(e) {
+                if (! self.fld.contains(e.target)) {
+                    self.close();
+                }
+            });
 		},
 		_open : function() {
 			if( this.open ) {
