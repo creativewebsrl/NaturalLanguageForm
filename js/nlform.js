@@ -170,6 +170,11 @@
 			this.form.fldOpen = this.pos;
 			var self = this;
 			this.fld.className += ' nl-field-open';
+			if (this.type === 'input' ) {
+				setTimeout(function() {
+					self.getinput.focus(); // or self.getinput.select();
+                		}, 100);
+            		}
 		},
 		close : function( opt, idx ) {
 			if( !this.open ) {
